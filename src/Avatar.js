@@ -10,15 +10,25 @@ import GiftedAvatar from './GiftedAvatar';
 import { isSameUser, isSameDay, warnDeprecated } from './utils';
 
 export default class Avatar extends React.Component {
+
+  onPress(other) {
+    const {onPress} = this.props;
+    if(onPress) {
+      onPress(other);
+    }
+  }
+
   renderAvatar() {
     if (this.props.renderAvatar) {
       const {renderAvatar, ...avatarProps} = this.props;
       return this.props.renderAvatar(avatarProps);
     }
+
     return (
       <GiftedAvatar
         avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
         user={this.props.currentMessage.user}
+        onPress={this.onPress.bind(this)}
       />
     );
   }
@@ -29,6 +39,7 @@ export default class Avatar extends React.Component {
         <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
           <GiftedAvatar
             avatarStyle={StyleSheet.flatten([styles[this.props.position].image, this.props.imageStyle[this.props.position]])}
+            onPress={this.onPress.bind(this)}
           />
         </View>
       );

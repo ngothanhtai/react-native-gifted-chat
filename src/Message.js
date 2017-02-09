@@ -1,8 +1,10 @@
 import React from 'react';
 import {
   View,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
+
+import moment from 'moment';
 
 import Avatar from './Avatar';
 import Bubble from './Bubble';

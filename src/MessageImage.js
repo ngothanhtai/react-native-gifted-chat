@@ -4,15 +4,29 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import LightBox from 'react-native-lightbox';
+import PhotoView from 'react-native-photo-view';
 
 export default class MessageImage extends React.Component {
   render() {
+    const {image} = this.props.currentMessage;
     return (
       <View style={[styles.container, this.props.containerStyle]}>
+        <LightBox
+          renderContent={() => {
+                return <PhotoView
+                  source={{uri: image}}
+                  minimumZoomScale={1}
+                  maximumZoomScale={3}
+                  androidScaleType="center"
+                />;
+              }}
+        >
         <Image
-          style={[styles.image, this.props.imageStyle]}
-          source={{uri: this.props.currentMessage.image}}
+          style={[styles.image, this.props.imageStyle,]}
+          source={{uri: image}}
         />
+        </LightBox>
       </View>
     );
   }
@@ -20,11 +34,12 @@ export default class MessageImage extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 12,
+    paddingBottom: 2,
   },
   image: {
     width: 150,
     height: 100,
-    borderRadius: 13,
     margin: 3,
     resizeMode: 'cover',
   },
