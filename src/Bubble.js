@@ -65,6 +65,13 @@ export default class Bubble extends React.Component {
     return null;
   }
 
+  renderRetry() {
+    if (this.props.renderRetry) {
+      return this.props.renderRetry(this.props);
+    }
+    return null;
+  }
+
   renderCustomView() {
     if (this.props.renderCustomView) {
       return this.props.renderCustomView(this.props);
@@ -111,6 +118,7 @@ export default class Bubble extends React.Component {
               {this.renderMessageImage()}
               {this.renderMessageText()}
               {this.renderTime()}
+              {this.renderRetry()}
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -171,6 +179,7 @@ Bubble.defaultProps = {
   renderMessageText: null,
   renderCustomView: null,
   renderTime: null,
+  renderRetry: null,
   position: 'left',
   currentMessage: {
     text: null,
@@ -195,6 +204,7 @@ Bubble.propTypes = {
   renderMessageText: React.PropTypes.func,
   renderCustomView: React.PropTypes.func,
   renderTime: React.PropTypes.func,
+  renderRetry: React.PropTypes.func,
   position: React.PropTypes.oneOf(['left', 'right']),
   currentMessage: React.PropTypes.object,
   nextMessage: React.PropTypes.object,
